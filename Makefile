@@ -1,4 +1,4 @@
-all: test lint typecheck
+all: build test lint typecheck
 
 node_modules: package.json
 	npm install && /usr/bin/touch node_modules
@@ -72,4 +72,4 @@ ts-specs: test/fetch-api/api.spec.js
 typecheck:
 	npx tsc --lib ES6 --noEmit index.d.ts ./test/fetch-api/api.spec.ts
 
-.PHONY: all build deploy lint test test-fetch test-fetch-browser test-fetch-whatwg test-fetch-node test-module test-module-web-cjs test-module-web-esm test-module-node-cjs test-module-node-esm test-module-react-native typecheck
+.PHONY: all build deploy dist lint test test-fetch test-fetch-browser test-fetch-whatwg test-fetch-node test-module test-module-web-cjs test-module-web-esm test-module-node-cjs test-module-node-esm test-module-react-native typecheck
