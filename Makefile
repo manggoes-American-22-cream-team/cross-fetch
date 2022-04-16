@@ -15,9 +15,6 @@ commit:
 commitlint: node_modules
 	npx commitlint --from origin/main --to HEAD --verbose
 
-compile: test/fetch-api/api.spec.ts
-	npx tsc
-
 cov:
 	npx nyc report --reporter=text-lcov > .reports/coverage.lcov && npx codecov
 
@@ -36,17 +33,17 @@ release-alpha:
 secure:
 	npx snyk test
 
-test: compile test-fetch test-module
+test: test-fetch test-module
 
 test-fetch: test-fetch-browser test-fetch-whatwg test-fetch-node
 
-test-fetch-browser: build
+test-fetch-browser: ts-specs build
 	./test/fetch-api/browser/run.sh
 
-test-fetch-whatwg: build
+test-fetch-whatwg: ts-specs build
 	./test/fetch-api/whatwg/run.sh
 
-test-fetch-node: build
+test-fetch-node: ts-specs build
 	./test/fetch-api/node/run.sh
 
 test-module: test-module-web-cjs test-module-web-esm test-module-node-cjs test-module-node-esm test-module-react-native
